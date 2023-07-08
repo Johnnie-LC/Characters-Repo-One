@@ -1,12 +1,21 @@
 import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from './components/home'
+import Personages from './components/personages'
+import { useAllCharacters } from "./hooks/useAllCharacters";
 
-const HarryPotter = () => (
+const HarryPotter = () => {
+  const { characters } = useAllCharacters();
+  
+  return(
   <div className="container">
-    <div>Name: Characters Repo One</div>
-    <div>Framework: react</div>
-    <div>Language: JavaScript</div>
-    <div>CSS: Empty CSS</div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/RickAndMorty" element={<Home characters={ characters } />}></Route>
+        <Route path="/RickAndMorty/personaje/:id" element={<Personages />}></Route>
+      </Routes>
+    </BrowserRouter>
   </div>
-);
+)};
 
 export default HarryPotter
